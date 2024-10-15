@@ -3,7 +3,13 @@
 import { useToast } from '@/hooks/use-toast';
 import { BarChart } from '@tremor/react';
 import { useEffect, useState } from 'react';
-import { Card, CardContent, CardHeader, CardTitle } from '../ui/card';
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from '../ui/card';
 import { Input } from '../ui/input';
 import { Label } from '../ui/label';
 
@@ -14,7 +20,9 @@ export const DiscretUniformChar: React.FC = () => {
   const [maxValue, setMaxValue] = useState<number>(6);
 
   const [probability, setProbability] = useState(0);
-  const [data, setData] = useState<{ category: string; value: number }[]>([]);
+  const [data, setData] = useState<{ category: string; probability: number }[]>(
+    []
+  );
 
   const generateDiscreteUniformProbability = (min: number, max: number) => {
     if (min > max) {
@@ -28,7 +36,7 @@ export const DiscretUniformChar: React.FC = () => {
 
     return Array.from({ length: range }, (_, index) => ({
       category: `${min + index}`,
-      value: probability,
+      probability: probability,
     }));
   };
 
@@ -51,9 +59,15 @@ export const DiscretUniformChar: React.FC = () => {
   return (
     <Card>
       <CardHeader>
-        <CardTitle className="text-xl font-semibold mb-10">{`DU(min:${minValue}, max:${maxValue}) = ${probability.toFixed(
-          4
-        )}`}</CardTitle>
+        <CardTitle className="text-lg font-bold">
+          {`DU(min:${minValue}, max:${maxValue})`}
+        </CardTitle>
+        <CardDescription className="font-semibol text-lg !mt-5 !mb-10">
+          Probability of one die landing on a specific number:{' '}
+          <span className="font-bold text-blue-600">
+            {probability.toFixed(4)}
+          </span>
+        </CardDescription>
         <div className="flex justify-between items-center gap-5">
           <div className="flex justify-start items-center gap-3 w-full">
             <Label className="font-bold text-lg w-[200px]">Min Value:</Label>
@@ -83,7 +97,7 @@ export const DiscretUniformChar: React.FC = () => {
           className="h-[500px]"
           data={data}
           index="category"
-          categories={['value']}
+          categories={['probability']}
           colors={['blue-500']}
           yAxisWidth={70}
           showGridLines={true}
