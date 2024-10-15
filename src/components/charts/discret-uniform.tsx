@@ -32,9 +32,7 @@ export const DiscretUniformChar: React.FC = () => {
   return (
     <Card>
       <CardHeader>
-        <h3 className="text-xl font-semibold mb-5">
-          Discrete Uniform Distribution
-        </h3>
+        <h3 className="text-xl font-semibold mb-10">{`DU(min=${minValue}, max=${maxValue})`}</h3>
         <div className="flex justify-between items-center gap-5">
           <div className="flex justify-start items-center gap-3 w-full">
             <Label className="font-bold text-lg w-[200px]">Min Value:</Label>

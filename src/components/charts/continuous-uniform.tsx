@@ -79,7 +79,7 @@ export const ContinuousUniformChar: React.FC = () => {
             />
           </div>
           <div className="flex justify-start items-center gap-3 w-full">
-            <Label className="font-bold text-lg flex-1">Level:</Label>
+            <Label className="font-bold text-lg flex-1">units:</Label>
             <Input
               type="number"
               name="productionLevel"
@@ -94,7 +94,7 @@ export const ContinuousUniformChar: React.FC = () => {
           </div>
         </div>
         <p className="font-semibol text-lg !mt-10">
-          Probability of producing {productionLevel} liters: {probability}
+          Probability of producing {productionLevel} units: {probability}
         </p>
       </CardHeader>
       <CardContent className="p-5">
