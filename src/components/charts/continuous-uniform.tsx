@@ -61,7 +61,7 @@ export const ContinuousUniformChar: React.FC = () => {
           {`CU(a:${valueA}, b:${valueB})`}
         </CardTitle>
         <CardDescription className="font-semibol text-lg !mt-5 !mb-10">
-          Probability density of one die landing on a specific number:{' '}
+          Probability density of producing {valueX} units:{' '}
           <span className="font-bold text-blue-600">{density.toFixed(4)}</span>
         </CardDescription>
         <h3 className="text-xl font-semibold mb-10"></h3>
