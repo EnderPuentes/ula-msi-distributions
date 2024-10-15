@@ -17,7 +17,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${jetBrains.className} antialiased`}>
+      <body
+        className={`${jetBrains.className} antialiased flex flex-col min-h-screen`}
+      >
         <main className="flex-1">{children}</main>
         <Footer />
       </body>
