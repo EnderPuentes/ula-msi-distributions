@@ -1,19 +1,28 @@
 'use client';
 
+import { useToast } from '@/hooks/use-toast';
 import { AreaChart } from '@tremor/react';
 import { useEffect, useMemo, useState } from 'react';
-import { Card, CardContent, CardHeader } from '../ui/card';
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from '../ui/card';
 import { Input } from '../ui/input';
 import { Label } from '../ui/label';
 
 export const ContinuousUniformChar: React.FC = () => {
+  const { toast } = useToast();
+
   const [valueA, setValueA] = useState<number>(300);
   const [valueB, setValueB] = useState<number>(450);
-  const [productionLevel, setProductionLevel] = useState<number>(400);
+  const [valueX, setValueX] = useState<number>(400);
 
-  const [probability, setProbability] = useState<number>(0);
+  const [density, setDensity] = useState<number>(0);
 
-  const calculateProbability = (a: number, b: number, x: number): number => {
+  const calculateDensity = (a: number, b: number, x: number): number => {
     if (x < a || x > b) {
       return 0;
     }
@@ -21,26 +30,41 @@ export const ContinuousUniformChar: React.FC = () => {
   };
 
   const data = useMemo(() => {
+    if (valueX < valueA || valueX > valueB) {
+      toast({
+        title: "'x' must be between 'a' and 'b'.",
+        variant: 'destructive',
+      });
+      return [];
+    }
+
     const points = 100;
     const step = (valueB - valueA) / points;
 
     const distributionData = [];
     for (let i = 0; i <= points; i++) {
       const x = valueA + i * step;
-      distributionData.push({ x, pdf: 1 / (valueB - valueA) });
+      distributionData.push({ x, density: 1 / (valueB - valueA) });
     }
 
     return distributionData;
-  }, [valueA, valueB]);
+  }, [valueA, valueB, valueX, toast]);
 
   useEffect(() => {
-    setProbability(calculateProbability(valueA, valueB, productionLevel));
-  }, [valueA, valueB, productionLevel]);
+    setDensity(calculateDensity(valueA, valueB, valueX));
+  }, [valueA, valueB, valueX]);
 
   return (
     <Card>
       <CardHeader>
-        <h3 className="text-xl font-semibold mb-10">{`CU(a=${valueA}, b=${valueB})`}</h3>
+        <CardTitle className="text-lg font-bold">
+          {`CU(a:${valueA}, b:${valueB})`}
+        </CardTitle>
+        <CardDescription className="font-semibol text-lg !mt-5 !mb-10">
+          Probability density of one die landing on a specific number:{' '}
+          <span className="font-bold text-blue-600">{density.toFixed(4)}</span>
+        </CardDescription>
+        <h3 className="text-xl font-semibold mb-10"></h3>
         <div className="flex justify-between items-center gap-5">
           <div className="flex justify-start items-center gap-3 w-full">
             <Label className="font-bold text-lg">a:</Label>
@@ -50,12 +74,8 @@ export const ContinuousUniformChar: React.FC = () => {
               value={valueA}
               onChange={(e) => {
                 setValueA(Number(e.target.value));
-                setProbability(
-                  calculateProbability(
-                    Number(e.target.value),
-                    valueB,
-                    productionLevel
-                  )
+                setDensity(
+                  calculateDensity(Number(e.target.value), valueB, valueX)
                 );
               }}
             />
@@ -68,46 +88,40 @@ export const ContinuousUniformChar: React.FC = () => {
               value={valueB}
               onChange={(e) => {
                 setValueB(Number(e.target.value));
-                setProbability(
-                  calculateProbability(
-                    valueA,
-                    Number(e.target.value),
-                    productionLevel
-                  )
+                setDensity(
+                  calculateDensity(valueA, Number(e.target.value), valueX)
                 );
               }}
             />
           </div>
           <div className="flex justify-start items-center gap-3 w-full">
-            <Label className="font-bold text-lg flex-1">units:</Label>
+            <Label className="font-bold text-lg flex-1">x:</Label>
             <Input
               type="number"
-              name="productionLevel"
-              value={productionLevel}
+              name="valueX"
+              value={valueX}
               onChange={(e) => {
-                setProductionLevel(Number(e.target.value));
-                setProbability(
-                  calculateProbability(valueA, valueB, Number(e.target.value))
+                setValueX(Number(e.target.value));
+                setDensity(
+                  calculateDensity(valueA, valueB, Number(e.target.value))
                 );
               }}
             />
           </div>
         </div>
-        <p className="font-semibol text-lg !mt-10">
-          Probability of producing {productionLevel} units: {probability}
-        </p>
       </CardHeader>
       <CardContent className="p-5">
         <AreaChart
           className="h-[500px]"
           data={data}
-          index="x" // Changed to 'x' to match the data structure
-          categories={['pdf']}
+          index="x"
+          categories={['density']}
           colors={['blue-500']}
           yAxisWidth={70}
           showGridLines={true}
           showAnimation={true}
           tickGap={100}
+          valueFormatter={(value) => value.toFixed(4)}
         />
       </CardContent>
     </Card>
