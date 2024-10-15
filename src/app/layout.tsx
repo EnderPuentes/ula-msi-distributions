@@ -1,4 +1,5 @@
 import { Footer } from '@/components/layout/footer';
+import { Toaster } from '@/components/ui/toaster';
 import type { Metadata } from 'next';
 import { JetBrains_Mono } from 'next/font/google';
 import './globals.css';
@@ -22,6 +23,7 @@ export default function RootLayout({
       >
         <main className="flex-1">{children}</main>
         <Footer />
+        <Toaster />
       </body>
     </html>
   );
