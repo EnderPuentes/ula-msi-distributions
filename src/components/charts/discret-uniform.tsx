@@ -59,18 +59,20 @@ export const DiscretUniformChar: React.FC = () => {
   return (
     <Card>
       <CardHeader>
-        <CardTitle className="text-lg font-bold">
+        <CardTitle className="text-sm md:text-lg font-bold">
           {`DU(min:${minValue}, max:${maxValue})`}
         </CardTitle>
-        <CardDescription className="font-semibol text-lg !mt-5 !mb-10">
+        <CardDescription className="font-semibol text-sm md:text-lg !mt-5 !mb-10">
           Probability of one die landing on a specific number:{' '}
           <span className="font-bold text-blue-600">
             {probability.toFixed(4)}
           </span>
         </CardDescription>
-        <div className="flex justify-between items-center gap-5">
+        <div className="flex justify-between items-center flex-col md:flex-row gap-5">
           <div className="flex justify-start items-center gap-3 w-full">
-            <Label className="font-bold text-lg w-[200px]">Min Value:</Label>
+            <Label className="font-bold text-sm md:text-lg w-[200px]">
+              Min Value:
+            </Label>
             <Input
               type="number"
               name="minValue"
@@ -81,7 +83,9 @@ export const DiscretUniformChar: React.FC = () => {
             />
           </div>
           <div className="flex justify-start items-center gap-3 w-full">
-            <Label className="font-bold text-lg w-[200px]">Max Value:</Label>
+            <Label className="font-bold text-sm md:text-lg w-[200px]">
+              Max Value:
+            </Label>
             <Input
               type="number"
               name="maxValue"
@@ -94,7 +98,7 @@ export const DiscretUniformChar: React.FC = () => {
       </CardHeader>
       <CardContent className="p-5">
         <BarChart
-          className="h-[500px]"
+          className="h-[250px] md:h-[500px]"
           data={data}
           index="category"
           categories={['probability']}
@@ -102,6 +106,7 @@ export const DiscretUniformChar: React.FC = () => {
           yAxisWidth={70}
           showGridLines={true}
           showAnimation={true}
+          tickGap={50}
           valueFormatter={(value) => value.toFixed(4)}
         />
       </CardContent>

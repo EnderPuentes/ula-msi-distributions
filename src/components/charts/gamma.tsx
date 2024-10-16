@@ -50,12 +50,14 @@ export const GammaDistributionChart: React.FC = () => {
   return (
     <Card>
       <CardHeader>
-        <CardTitle className="text-lg font-bold !mb-10">
+        <CardTitle className="tet-sm md:text-lg font-bold !mb-10">
           {`G(k=${shape}, θ=${scale})`}
         </CardTitle>
         <div className="flex justify-between items-center gap-5">
           <div className="flex justify-start items-center gap-3 w-full">
-            <Label className="font-bold text-lg w-[180px]">Shape (k):</Label>
+            <Label className="font-bold tet-sm md:text-lg w-[180px]">
+              Shape (k):
+            </Label>
             <Input
               type="number"
               name="shape"
@@ -65,7 +67,9 @@ export const GammaDistributionChart: React.FC = () => {
             />
           </div>
           <div className="flex justify-start items-center gap-3 w-full">
-            <Label className="font-bold text-lg w-[180px]">Scale (θ):</Label>
+            <Label className="font-bold tet-sm md:text-lg w-[180px]">
+              Scale (θ):
+            </Label>
             <Input
               type="number"
               name="scale"
@@ -77,14 +81,16 @@ export const GammaDistributionChart: React.FC = () => {
       </CardHeader>
       <CardContent className="p-5">
         <AreaChart
+          className="h-[250px] md:h-[500px]"
           data={data}
           index="x"
           categories={['y']}
           colors={['blue-500']}
-          yAxisWidth={70}
+          yAxisWidth={55}
           showGridLines={true}
           showAnimation={true}
           valueFormatter={(value) => value.toFixed(4)}
+          tickGap={50}
         />
       </CardContent>
     </Card>

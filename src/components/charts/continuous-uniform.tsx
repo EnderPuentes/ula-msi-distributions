@@ -57,17 +57,16 @@ export const ContinuousUniformChar: React.FC = () => {
   return (
     <Card>
       <CardHeader>
-        <CardTitle className="text-lg font-bold">
+        <CardTitle className="text-sm md:text-lg font-bold">
           {`CU(a:${valueA}, b:${valueB})`}
         </CardTitle>
-        <CardDescription className="font-semibol text-lg !mt-5 !mb-10">
+        <CardDescription className="font-semibol text-sm md:text-lg !mt-5 !mb-10">
           Probability density of producing {valueX} units:{' '}
           <span className="font-bold text-blue-600">{density.toFixed(4)}</span>
         </CardDescription>
-        <h3 className="text-xl font-semibold mb-10"></h3>
-        <div className="flex justify-between items-center gap-5">
+        <div className="flex justify-between items-center flex-col md:flex-row gap-5">
           <div className="flex justify-start items-center gap-3 w-full">
-            <Label className="font-bold text-lg">a:</Label>
+            <Label className="font-bold text-sm md:text-lg">a:</Label>
             <Input
               type="number"
               name="valueA"
@@ -81,7 +80,7 @@ export const ContinuousUniformChar: React.FC = () => {
             />
           </div>
           <div className="flex justify-start items-center gap-3 w-full">
-            <Label className="font-bold text-lg">b:</Label>
+            <Label className="font-bold text-sm md:text-lg">b:</Label>
             <Input
               type="number"
               name="valueB"
@@ -95,7 +94,7 @@ export const ContinuousUniformChar: React.FC = () => {
             />
           </div>
           <div className="flex justify-start items-center gap-3 w-full">
-            <Label className="font-bold text-lg flex-1">x:</Label>
+            <Label className="font-bold text-sm md:text-lg flex-1">x:</Label>
             <Input
               type="number"
               name="valueX"
@@ -112,15 +111,15 @@ export const ContinuousUniformChar: React.FC = () => {
       </CardHeader>
       <CardContent className="p-5">
         <AreaChart
-          className="h-[500px]"
+          className="h-[250px] md:h-[500px]"
           data={data}
           index="x"
           categories={['density']}
           colors={['blue-500']}
-          yAxisWidth={70}
+          yAxisWidth={55}
           showGridLines={true}
           showAnimation={true}
-          tickGap={100}
+          tickGap={50}
           valueFormatter={(value) => value.toFixed(4)}
         />
       </CardContent>
