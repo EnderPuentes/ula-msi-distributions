@@ -103,7 +103,7 @@ export const DiscretUniformChar: React.FC = () => {
           index="category"
           categories={['probability']}
           colors={['blue-500']}
-          yAxisWidth={70}
+          yAxisWidth={55}
           showGridLines={true}
           showAnimation={true}
           tickGap={50}
