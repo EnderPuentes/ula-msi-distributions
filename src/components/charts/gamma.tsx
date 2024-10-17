@@ -53,7 +53,7 @@ export const GammaDistributionChart: React.FC = () => {
         <CardTitle className="tet-sm md:text-lg font-bold !mb-10">
           {`G(k=${shape}, θ=${scale})`}
         </CardTitle>
-        <div className="flex justify-between items-center gap-5">
+        <div className="flex justify-between items-center flex-col md:flex-row gap-5">
           <div className="flex justify-start items-center gap-3 w-full">
             <Label className="font-bold tet-sm md:text-lg w-[180px]">
               Shape (k):
