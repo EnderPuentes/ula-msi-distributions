@@ -65,7 +65,7 @@ export const DiscretUniformChar: React.FC = () => {
         <CardDescription className="font-semibol text-sm md:text-lg !mt-5 !mb-10">
           Probability of one die landing on a specific number:{' '}
           <span className="font-bold text-blue-600">
-            {probability.toFixed(4)}
+            {probability.toFixed(10)}
           </span>
         </CardDescription>
         <div className="flex justify-between items-center flex-col md:flex-row gap-5">

@@ -62,7 +62,7 @@ export const ContinuousUniformChar: React.FC = () => {
         </CardTitle>
         <CardDescription className="font-semibol text-sm md:text-lg !mt-5 !mb-10">
           Probability density of producing {valueX} units:{' '}
-          <span className="font-bold text-blue-600">{density.toFixed(4)}</span>
+          <span className="font-bold text-blue-600">{density.toFixed(10)}</span>
         </CardDescription>
         <div className="flex justify-between items-center flex-col md:flex-row gap-5">
           <div className="flex justify-start items-center gap-3 w-full">
@@ -120,7 +120,7 @@ export const ContinuousUniformChar: React.FC = () => {
           showGridLines={true}
           showAnimation={true}
           tickGap={50}
-          valueFormatter={(value) => value.toFixed(4)}
+          valueFormatter={(value) => value.toFixed(10)}
         />
       </CardContent>
     </Card>
